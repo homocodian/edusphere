@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EduSphere
+
+EduSphere is a powerful and user-friendly Learning Management System (LMS) designed to streamline education management. Empower educators and learners with a platform that facilitates seamless course creation, management, and delivery.
+
+## Features
+
+- **User-Friendly Interface**: Intuitive design for easy navigation.
+- **Effortless Course Management**: Create, organize, and manage courses effortlessly.
+- **Progress Tracking**: Monitor and track the progress of courses and learners.
+- **Innovative Education**: Dive into the future of education with cutting-edge features.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Ensure you have NodeJS installed.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository: `git clone https://github.com/homocodian/edusphere.git`
+2. Install dependencies: `npm install` or `yarn install`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Usage
 
-## Learn More
+1. **Installation**: Clone the repository and install dependencies.
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone https://github.com/yourusername/edusphere.git
+   cd edusphere
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Build the Application**: Build the EduSphere application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```bash
+   npm run build
+   ```
 
-## Deploy on Vercel
+3. **Run the Application**: Start the EduSphere application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm start
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. **Access the Application**: Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
+
+5. **Login**: Use the provided credentials to log in and explore the features.
+
+   - Username: yourusername
+   - Password: yourpassword
+
+6. **Create a Course**: Follow the on-screen instructions to create and manage courses.
+
+## Contributing
+
+We welcome contributions! Please follow our [contribution guidelines] and [code of conduct].
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
