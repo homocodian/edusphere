@@ -3,6 +3,7 @@ import { Inter as FontSans } from 'next/font/google';
 import type { Metadata } from 'next';
 
 import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from 'sonner';
 
 import { cn } from '@/lib/utils';
 
@@ -34,6 +35,7 @@ export default function RootLayout({
 					)}
 				>
 					{children}
+					<Toaster richColors />
 				</body>
 			</html>
 		</ClerkProvider>
