@@ -6,6 +6,7 @@ import { LayoutDashboard } from 'lucide-react';
 import IconBadge from '@/components/icon-badge';
 
 import { db } from '@/lib/db';
+import DescriptionForm from './_components/description-form';
 import TitleForm from './_components/title-form';
 
 type CourseIdPageProps = {
@@ -59,7 +60,14 @@ async function CourseIdPage({ params }: CourseIdPageProps) {
 						<IconBadge icon={LayoutDashboard} />
 						<h2 className="text-xl font-medium">Customize your course</h2>
 					</div>
-					<TitleForm initialData={course} courseId={course.id} />
+					<TitleForm
+						initialData={{ title: course.title }}
+						courseId={course.id}
+					/>
+					<DescriptionForm
+						initialData={{ description: course.description || undefined }}
+						courseId={course.id}
+					/>
 				</div>
 			</div>
 		</div>
