@@ -7,6 +7,7 @@ import IconBadge from '@/components/icon-badge';
 
 import { db } from '@/lib/db';
 import DescriptionForm from './_components/description-form';
+import ImageForm from './_components/image-form';
 import TitleForm from './_components/title-form';
 
 type CourseIdPageProps = {
@@ -61,12 +62,16 @@ async function CourseIdPage({ params }: CourseIdPageProps) {
 						<h2 className="text-xl font-medium">Customize your course</h2>
 					</div>
 					<TitleForm
-						initialData={{ title: course.title }}
 						courseId={course.id}
+						initialData={{ title: course.title }}
 					/>
 					<DescriptionForm
-						initialData={{ description: course.description || undefined }}
 						courseId={course.id}
+						initialData={{ description: course.description }}
+					/>
+					<ImageForm
+						courseId={course.id}
+						initialData={{ imageUrl: course.imageUrl }}
 					/>
 				</div>
 			</div>

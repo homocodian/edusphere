@@ -35,7 +35,7 @@ export async function PATCH(req: Request, { params }: context) {
 		const json = await req.json();
 		const body = valuesSchema.parse(json);
 
-		const course = await db.course.update({
+		await db.course.update({
 			where: {
 				id: courseId
 			},
