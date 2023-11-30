@@ -6,15 +6,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Course } from '@prisma/client';
-import { ImageIcon, Loader2, Pencil, PlusCircle } from 'lucide-react';
+import { ImageIcon, Pencil, PlusCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { FileUpload } from '@/components/file-upload';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
-import { Textarea } from '@/components/ui/textarea';
 
 import { axiosInstance } from '@/lib/axios';
 import { cn } from '@/lib/utils';
