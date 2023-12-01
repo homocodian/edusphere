@@ -50,6 +50,6 @@ export async function PATCH(req: Request, { params }: context) {
 			return new Response(JSON.stringify(error.message), { status: 422 });
 		}
 
-		return new Response('Server error', { status: 500 });
+		return new Response(null, { status: 500 });
 	}
 }

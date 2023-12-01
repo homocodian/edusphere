@@ -22,7 +22,7 @@ type PriceFormProps = {
 	initialData: {
 		price: Course['price'];
 	};
-	courseId: string;
+	courseId: Course['id'];
 };
 
 const formScheme = z.object({

@@ -17,8 +17,10 @@ import { Combobox } from '@/components/ui/combobox';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 
 type CategoryFormProps = {
-	initialData: Course;
-	courseId: string;
+	initialData: {
+		categoryId: Course["categoryId"]
+	};
+	courseId: Course['id'];
 	options: { label: string; value: string }[];
 };
 

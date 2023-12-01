@@ -1,15 +1,20 @@
 import { redirect } from 'next/navigation';
 
 import { auth } from '@clerk/nextjs';
-import { CircleDollarSign, LayoutDashboard, ListChecks } from 'lucide-react';
-
-import IconBadge from '@/components/icon-badge';
+import {
+	CircleDollarSign,
+	File,
+	LayoutDashboard,
+	ListChecks
+} from 'lucide-react';
 
 import { db } from '@/lib/db';
+import AttachmentForm from './_components/attachment-form';
 import CategoryForm from './_components/category-form';
 import DescriptionForm from './_components/description-form';
 import ImageForm from './_components/image-form';
 import PriceForm from './_components/price-form';
+import SectionTitle from './_components/section-title';
 import TitleForm from './_components/title-form';
 
 type CourseIdPageProps = {
@@ -28,6 +33,13 @@ async function CourseIdPage({ params }: CourseIdPageProps) {
 	const course = await db.course.findUnique({
 		where: {
 			id: params.courseId
+		},
+		include: {
+			attachments: {
+				orderBy: {
+					createdAt: 'asc'
+				}
+			}
 		}
 	});
 
@@ -65,10 +77,7 @@ async function CourseIdPage({ params }: CourseIdPageProps) {
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
 				<div>
-					<div className="flex items-center gap-x-2">
-						<IconBadge icon={LayoutDashboard} />
-						<h2 className="text-xl font-medium">Customize your course</h2>
-					</div>
+					<SectionTitle icon={LayoutDashboard} title="Customize your course" />
 					<TitleForm
 						courseId={course.id}
 						initialData={{ title: course.title }}
@@ -83,7 +92,9 @@ async function CourseIdPage({ params }: CourseIdPageProps) {
 					/>
 					<CategoryForm
 						courseId={course.id}
-						initialData={course}
+						initialData={{
+							categoryId: course.categoryId
+						}}
 						options={category.map((category) => ({
 							label: category.name,
 							value: category.id
@@ -92,21 +103,22 @@ async function CourseIdPage({ params }: CourseIdPageProps) {
 				</div>
 				<div className="space-y-6">
 					<div>
-						<div className="flex items-center">
-							<IconBadge icon={ListChecks} />
-							<h2 className="text-xl">Course chapters</h2>
-						</div>
+						<SectionTitle icon={ListChecks} title="Course chapters" />
 						<div>TODO: Chapters</div>
 					</div>
 					<div>
-						<div className="flex items-center">
-							<IconBadge icon={CircleDollarSign} />
-							<h2 className="text-xl">Sell your course</h2>
-						</div>
+						<SectionTitle icon={CircleDollarSign} title="Sell your course" />
 						<PriceForm
 							initialData={{
 								price: course.price
 							}}
+							courseId={course.id}
+						/>
+					</div>
+					<div>
+						<SectionTitle icon={File} title="Resources and attachments" />
+						<AttachmentForm
+							initialData={{ attachments: course.attachments }}
 							courseId={course.id}
 						/>
 					</div>

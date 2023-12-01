@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Course } from '@prisma/client';
 import { Loader2, Pencil } from 'lucide-react';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -17,9 +18,9 @@ import { axiosInstance } from '@/lib/axios';
 
 type TitleFormProps = {
 	initialData: {
-		title: string;
+		title: Course['title'];
 	};
-	courseId: string;
+	courseId: Course['id'];
 };
 
 const formScheme = z.object({

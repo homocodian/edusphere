@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { zodResolver } from '@hookform/resolvers/zod';
+import { Course } from '@prisma/client';
 import { ImageIcon, Pencil, PlusCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -14,13 +13,12 @@ import { FileUpload } from '@/components/file-upload';
 import { Button } from '@/components/ui/button';
 
 import { axiosInstance } from '@/lib/axios';
-import { cn } from '@/lib/utils';
 
 type ImageFormProps = {
 	initialData: {
-		imageUrl: string | null;
+		imageUrl: Course['imageUrl'];
 	};
-	courseId: string;
+	courseId: Course['id'];
 };
 
 const formScheme = z.object({
@@ -34,15 +32,6 @@ function ImageForm({ initialData, courseId }: ImageFormProps) {
 	const [isEditing, setIsEditing] = useState(false);
 
 	const toggleEdit = () => setIsEditing((current) => !current);
-
-	const form = useForm<z.infer<typeof formScheme>>({
-		resolver: zodResolver(formScheme),
-		defaultValues: {
-			imageUrl: initialData.imageUrl || ''
-		}
-	});
-
-	const { isSubmitting, isValid } = form.formState;
 
 	async function onSubmit(values: z.infer<typeof formScheme>) {
 		try {
