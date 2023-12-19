@@ -1,27 +1,14 @@
 import { auth } from '@clerk/nextjs';
-import { Course } from '@prisma/client';
-import { z, ZodError, ZodType } from 'zod';
+import { ZodError } from 'zod';
 
 import { db } from '@/lib/db';
+import { updateDataArray } from '@/lib/validations/chapters-list';
 
 type Context = {
 	params: {
 		courseId: string;
 	};
 };
-
-type Values = Omit<Course, 'id' | 'createdAt' | 'updatedAt' | 'userId'>;
-
-const valuesSchema: ZodType<Partial<Values>> = z
-	.object({
-		title: z.string().min(1).trim(),
-		description: z.string().min(1).trim(),
-		imageUrl: z.string().url().trim(),
-		price: z.number(),
-		isPublished: z.boolean(),
-		categoryId: z.string().min(1)
-	})
-	.partial();
 
 export async function PATCH(req: Request, { params }: Context) {
 	try {
@@ -33,16 +20,25 @@ export async function PATCH(req: Request, { params }: Context) {
 
 		const { courseId } = params;
 		const json = await req.json();
-		const body = valuesSchema.parse(json);
+		const body = updateDataArray.parse(json);
 
-		await db.course.update({
+		const courseOwner = await db.course.findUnique({
 			where: {
-				id: courseId
-			},
-			data: {
-				...body
+				id: courseId,
+				userId
 			}
 		});
+
+		if (!courseOwner) {
+			return new Response('Unauthorized', { status: 401 });
+		}
+
+		for await (const item of body) {
+			await db.chapter.update({
+				where: { id: item.id },
+				data: { position: item.position }
+			});
+		}
 
 		return new Response(null, { status: 204 });
 	} catch (error) {
