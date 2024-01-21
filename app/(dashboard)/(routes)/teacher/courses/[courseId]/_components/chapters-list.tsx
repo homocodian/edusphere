@@ -99,9 +99,9 @@ function ChaptersList({ items, onEdit, onReorder }: ChaptersListProps) {
 											</Badge>
 											<button
 												onClick={() => onEdit(chapter.id)}
-												className="h-4 w-4 cursor-pointer hover:opacity-75 transition"
+												className="cursor-pointer hover:opacity-75 transition"
 											>
-												<Pencil />
+												<Pencil className="h-5 w-5" />
 											</button>
 										</div>
 									</div>
