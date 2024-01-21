@@ -61,7 +61,6 @@ function ChaptersForm({ initialData, courseId }: ChaptersFormProps) {
 	async function onReorder(updateData: UpdateData[]) {
 		try {
 			setIsUpdating(true);
-			console.log('updating...', updateData);
 			await axiosInstance.patch(
 				`/api/courses/${courseId}/chapters/reorder`,
 				updateData
@@ -76,7 +75,12 @@ function ChaptersForm({ initialData, courseId }: ChaptersFormProps) {
 	}
 
 	return (
-		<div className="mt-6 border bg-slate-100 rounded-md p-4">
+		<div className="relative mt-6 border bg-slate-100 rounded-md p-4">
+			{isUpdating && (
+				<div className="inset-0 h-full w-full absolute bg-slate-700/20 rounded-md flex justify-center items-center">
+					<Loader2 className="h-6 w-6 animate-spin text-sky-700" />
+				</div>
+			)}
 			<div className="font-medium flex justify-between items-center">
 				Course chapter
 				<Button variant="ghost" onClick={toggleCreating}>
