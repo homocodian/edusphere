@@ -134,7 +134,9 @@ function ChaptersForm({ initialData, courseId }: ChaptersFormProps) {
 					>
 						{!initialData.chapters.length && 'No chapters'}
 						<ChaptersList
-							onEdit={() => {}}
+							onEdit={(id) => {
+								router.push(`/teacher/courses/${courseId}/chapters/${id}`);
+							}}
 							onReorder={onReorder}
 							items={initialData.chapters}
 						/>

@@ -74,3 +74,11 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+.ql-container {
+	font-size: 16px !important;
+}
+
+.ql-tooltip {
+	@apply z-50;
+}
