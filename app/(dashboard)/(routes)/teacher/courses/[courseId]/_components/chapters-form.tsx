@@ -59,6 +59,7 @@ function ChaptersForm({ initialData, courseId }: ChaptersFormProps) {
 	}
 
 	async function onReorder(updateData: UpdateData[]) {
+		console.log('😂 reordering', updateData);
 		try {
 			setIsUpdating(true);
 			await axiosInstance.patch(

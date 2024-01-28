@@ -48,7 +48,7 @@ function ChapterActions({
 		} finally {
 			setTogglingPublish(false);
 		}
-	}, [isPublished, setTogglingPublish]);
+	}, [isPublished, setTogglingPublish, courseId, chapterId, router]);
 
 	async function onDelete() {
 		try {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
 	DragDropContext,
@@ -9,7 +9,6 @@ import {
 	DropResult
 } from '@hello-pangea/dnd';
 import { Chapter } from '@prisma/client';
-import debounce from 'lodash/debounce';
 import { Grip, Pencil } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -27,8 +26,6 @@ function ChaptersList({ items, onEdit, onReorder }: ChaptersListProps) {
 	const [isMounted, setIsMounted] = useState(false);
 	const [chapters, setChapters] = useState(items);
 
-	const debouncedOnReorder = useCallback(debounce(onReorder, 1000), []);
-
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
@@ -41,17 +38,22 @@ function ChaptersList({ items, onEdit, onReorder }: ChaptersListProps) {
 		if (!result.destination) return;
 
 		const items = Array.from(chapters);
-		const [reorderItem] = items.splice(result.source.index, 1);
-		items.splice(result.destination.index, 0, reorderItem);
+		const [reorderedItem] = items.splice(result.source.index, 1);
+		items.splice(result.destination.index, 0, reorderedItem);
+
+		const startIndex = Math.min(result.source.index, result.destination.index);
+		const endIndex = Math.max(result.source.index, result.destination.index);
+
+		const updatedChapters = items.slice(startIndex, endIndex + 1);
 
 		setChapters(items);
 
-		const bulkUpdateData = items.map((chapter) => ({
+		const bulkUpdateData = updatedChapters.map((chapter) => ({
 			id: chapter.id,
 			position: items.findIndex((item) => item.id === chapter.id)
 		}));
 
-		debouncedOnReorder(bulkUpdateData);
+		onReorder(bulkUpdateData);
 	}
 
 	if (!isMounted) return null;
