@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { auth } from '@clerk/nextjs';
@@ -25,6 +26,7 @@ type CourseIdPageProps = {
 };
 
 async function CourseIdPage({ params }: CourseIdPageProps) {
+	noStore();
 	const { userId } = auth();
 
 	if (!userId) {
@@ -120,7 +122,6 @@ async function CourseIdPage({ params }: CourseIdPageProps) {
 						/>
 					</div>
 					<div>
-						Z
 						<SectionTitle icon={CircleDollarSign} title="Sell your course" />
 						<PriceForm
 							initialData={{
